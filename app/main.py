@@ -120,4 +120,10 @@ def forecast():
     if df_global.empty:
         raise HTTPException(status_code=503, detail="Data mavjud emas")
 
-    predicted = forecast_next_month_revenue
+    predicted = forecast_next_month_revenue()  # ← () qo'shildi!
+
+    return {
+        "next_month_revenue": round(predicted, 2),
+        "method": "3-month moving average",
+        "note": "Oxirgi 3 oy o'rtachasi asosida hisoblandi"
+    }
