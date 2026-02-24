@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: sales_user
+      POSTGRES_PASSWORD: securepass123
+      POSTGRES_DB: sales_db
+    ports:
+      - "5433:5432"   # lokal 5432 band bo'lsa konflikt bo'lmasligi uchun
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sales_user"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://sales_user:securepass123@db:5432/sales_db
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app   # kod o'zgarishini real-time ko'rish uchun
+
+volumes:
+  postgres_data:
