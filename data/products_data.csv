@@ -1,0 +1,11 @@
+product_id,product_name,category,cost_price
+P001,Laptop,Electronics,600
+P002,Smartphone,Electronics,350
+P003,Headphones,Electronics,40
+P004,Office Chair,Furniture,55
+P005,Desk,Furniture,120
+P006,Notebook,Stationery,1
+P007,Pen,Stationery,0.3
+P008,Backpack,Accessories,15
+P009,Sneakers,Fashion,25
+P010,T-shirt,Fashion,5
