@@ -1,6 +1,5 @@
-# app/forecasting.py
 import pandas as pd
-from .analytics import load_cleaned_data     # ← BU QATORNI QO‘SHING!
+from .analytics import load_cleaned_data    
 
 
 def forecast_next_month_revenue():

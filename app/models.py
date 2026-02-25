@@ -19,15 +19,15 @@ CREATE TABLE sales (
     profit DECIMAL(10,2)
 );
 
--- Indexes
+#Indexes
 CREATE INDEX idx_order_date ON sales(order_date);
 CREATE INDEX idx_category ON sales(category);
 CREATE INDEX idx_region ON sales(region);
 
--- Bonus: Materialized View for monthly revenue
+#Bonus: Materialized View for monthly revenue
 CREATE MATERIALIZED VIEW monthly_revenue AS
 SELECT DATE_TRUNC('month', order_date) AS month, SUM(revenue) AS total_revenue
 FROM sales GROUP BY month;
 
--- Partitioning (order_date bo'yicha, masalan yillar bo'yicha)
+#Partitioning (order_date bo'yicha, masalan yillar bo'yicha)
 CREATE TABLE sales_partitioned (LIKE sales INCLUDING ALL) PARTITION BY RANGE (order_date);

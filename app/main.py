@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime
 from typing import Dict, List, Any
 
-# Analytics va forecasting modullarni import qilamiz
+# Analytics va forecasting modullarni import qilish
 from .analytics import (
     get_total_revenue,
     get_total_profit,
@@ -25,11 +25,10 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Global df (productionda yaxshiroq caching/DB ishlatiladi)
 try:
     df_global = load_cleaned_data()
 except FileNotFoundError:
-    df_global = pd.DataFrame()  # Agar cleaned file yo'q bo'lsa
+    df_global = pd.DataFrame()  # Cleaned file yo'q bo'lsa
 
 
 @app.get("/", tags=["Root"])
@@ -120,10 +119,10 @@ def forecast():
     if df_global.empty:
         raise HTTPException(status_code=503, detail="Data mavjud emas")
 
-    predicted = forecast_next_month_revenue()  # ← () qo'shildi!
+    predicted = forecast_next_month_revenue()  
 
     return {
         "next_month_revenue": round(predicted, 2),
         "method": "3-month moving average",
-        "note": "Oxirgi 3 oy o'rtachasi asosida hisoblandi"
+        "note": "Oxirgi 3 oy o'rtachasi asosida hisoblanadi"
     }

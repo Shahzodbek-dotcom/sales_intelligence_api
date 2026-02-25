@@ -1,4 +1,3 @@
-# scripts/load_to_db.py
 import pandas as pd
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
@@ -8,7 +7,7 @@ import logging
 # Logging sozlash (xatolarni ko'rish uchun)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# .env fayldan o'qish
+
 load_dotenv()
 
 DATABASE_URL = os.getenv("postgresql://localhost:5432/analyze_db")
@@ -16,7 +15,7 @@ DATABASE_URL = os.getenv("postgresql://localhost:5432/analyze_db")
 if not DATABASE_URL:
     raise ValueError("DATABASE_URL .env faylda topilmadi! .env ga quyidagini qo'shing:\nDATABASE_URL=postgresql://postgres:PAROLINGIZ@localhost:5432/sales_intelligence")
 
-logging.info(f"Ulanyapman: {DATABASE_URL}")
+logging.info(f"Ulanmoqda: {DATABASE_URL}")
 
 try:
     engine = create_engine(DATABASE_URL)
